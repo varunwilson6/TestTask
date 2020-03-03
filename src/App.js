@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Provider } from "react-redux";
+import { BrowserRouter, Switch } from "react-router-dom";
+import store from "./store"
 import './App.css';
+import CartContainer from './containers/cartContainer';
+import ProductsContainer from './containers/productsContainer'
+import HeaderedLayout from "./containers/headerLayout"
 
-function App() {
+function RooTContainer() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store = { store } >
+      <BrowserRouter>
+        <Switch>
+          <HeaderedLayout exact path= "/" ComponentToRender={ProductsContainer} />
+          <HeaderedLayout path="/mycart" ComponentToRender={CartContainer} />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
-export default App;
+export default RooTContainer;
